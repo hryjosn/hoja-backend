@@ -5,13 +5,13 @@ import bodyParser from 'koa-bodyparser'
 // let jwt = require('jsonwebtoken');
 
 
-const app = new Koa();
+const index = new Koa();
 
-app.use(logger());
-app.use(bodyParser());
+index.use(logger());
+index.use(bodyParser());
 
 // Custom 401 handling
-app.use(async function (ctx, next) {
+index.use(async function (ctx, next) {
     return next().catch((err) => {
         if (err.status === 401) {
             ctx.status = 401;
@@ -28,16 +28,16 @@ app.use(async function (ctx, next) {
     });
 });
 
-// app.use(jwt({
+// index.use(jwt({
 //     secret: 'test'
 // }).unless({
 //     path: [/^\/public/, "/"]
 // }));
-app.use(async(ctx, next) => {
+index.use(async(ctx, next) => {
     const start_time = Date.now();
     await next();
     const ms = Date.now() - start_time;
     console.log(`${ctx.method} ${ctx.url} - ${ms}ms`);
 });
-app.use(router.routes());
-app.listen(3001);
+index.use(router.routes());
+index.listen(3001);
