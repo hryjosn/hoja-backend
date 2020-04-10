@@ -28,11 +28,7 @@ app.use(async function (ctx, next) {
     });
 });
 
-// app.use(jwt({
-//     secret: 'test'
-// }).unless({
-//     path: [/^\/public/, "/"]
-// }));
+
 app.use(async(ctx, next) => {
     const start_time = Date.now();
     await next();
