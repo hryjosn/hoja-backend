@@ -9,6 +9,8 @@
     "node": "10.x"
   },
   "scripts": {
+    "build": "rm -rf dist && mkdir dist && babel src -s -d dist",
+    "start": "npm run build && node dist",
     "dev": "nodemon --exec babel-node app.js"
   },
   "dependencies": {
