@@ -5,6 +5,9 @@
   "repository": "https://github.com/johnsonsy/hoja-backend.git",
   "author": "Johnson <jo74705@gmail.com>",
   "license": "MIT",
+  "engines": {
+    "node": "10.x"
+  },
   "scripts": {
     "dev": "nodemon --exec babel-node app.js"
   },
@@ -20,8 +23,10 @@
     "axios": "^0.19.2",
     "babel-preset-env": "^1.7.0",
     "core-js": "^3.6.4",
+    "jsonwebtoken": "^8.5.1",
     "koa": "^2.11.0",
     "koa-bodyparser": "^4.3.0",
+    "koa-jwt": "^3.6.0",
     "koa-logger": "^3.2.1",
     "koa-router": "^8.0.8",
     "mongoose": "^5.9.7"
