@@ -22,10 +22,10 @@ class UserController {
     }
     async getUsersData(ctx, next) {
         const res = await userModel.find();
-        console.log("res",res)
         ctx.status = 201;
         ctx.body = {
             stat: 'ok',
+            users:res
         };
     }
 
