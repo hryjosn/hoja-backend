@@ -20,6 +20,9 @@ class UserModel {
     find() {
         return User.find();
     }
+    findOne(params) {
+        return User.findOne(params);
+    }
 
 }
 

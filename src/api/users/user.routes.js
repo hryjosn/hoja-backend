@@ -8,7 +8,7 @@ const router = new Router({
 const { addUserData, login, getUserData, modifiedUserData, deleteUserDelData,getUsersData } = AuthController;
 router
     .post('/user', addUserData)
-    // .post('/user/login', login)
+    .post('/login', login)
     .get('/users', getUsersData)
     // .put('/user/:id/:method', modifiedUserData)
     // .delete('/user/:id/:method', deleteUserDelData);

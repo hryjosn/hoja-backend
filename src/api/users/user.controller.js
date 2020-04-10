@@ -1,5 +1,6 @@
-'use strict';
 import userModel from './user.model'
+
+const jwt = require('jsonwebtoken');
 
 /**
  * Mock database, replace this with your db models import, required to perform query to your database.
@@ -9,69 +10,63 @@ class UserController {
     async addUserData(ctx, next) {
         const { phoneNumber, password, email } = ctx.request.body;
         if (phoneNumber && email && password) {
-            const res = await userModel.addOne({...ctx.request.body});
+            const res = await userModel.addOne({ ...ctx.request.body });
             ctx.status = 201;
             ctx.body = {
                 stat: 'ok',
-                id:res.id,
+                id: res.id,
                 ...ctx.request.body
             };
         } else {
             ctx.status = 400;
         }
     }
+
     async getUsersData(ctx, next) {
         const res = await userModel.find();
         ctx.status = 201;
         ctx.body = {
             stat: 'ok',
-            users:res
+            users: res
         };
     }
 
     // login check
     async login(ctx, next) {
-        const { email } = ctx.request.body;
-        const { pw } = ctx.request.body;
-
-        if (email && pw) {
-            let userMail = email;
-            let userPw = pw;
-
-            const newUserData = userDataList.find((item) => (item.userMail === userMail && item.userPw === userPw));
-
-            if (newUserData) {
-                ctx.body = {
-                    stat: "ok",
-                    result: newUserData
-                };
-            } else {
-                ctx.status = 404;
+        const { email, phoneNumber, password } = ctx.request.body;
+        if ((!email && !phoneNumber) || !password) {
+            return ctx.body = {
+                code: '000002',
+                data: null,
+                msg: '參數格式錯誤'
+            }
+        }
+        let queryObject;
+        if (email) {
+            queryObject = { email, password }
+        } else {
+            queryObject = { phoneNumber, password }
+        }
+        const result = await userModel.findOne(queryObject);
+        if (result !== null) {
+            const token = jwt.sign({
+                name: result.name,
+                _id: result._id
+            }, 'my_token', { expiresIn: '1d' });
+            return ctx.body = {
+                code: '000001',
+                data: token,
+                msg: '登錄成功'
             }
         } else {
-            ctx.status = 404;
+            return ctx.body = {
+                code: '000002',
+                data: null,
+                msg: 'email,電話,或密碼錯誤'
+            }
         }
     }
 
-    // get User Data
-    async getUserData(ctx, next) {
-        const userId = parseInt(ctx.params.id);
-
-        if (userId) {
-            const newUserDataList = userDataList.find((item) => item.userId === userId);
-
-            if (newUserDataList) {
-                ctx.body = {
-                    stat: 'ok',
-                    result: newUserDataList
-                };
-            } else {
-                ctx.status = 404;
-            }
-        } else {
-            ctx.status = 404;
-        }
-    }
 
     // modified User Data
     async modifiedUserData(ctx, next) {
