@@ -54,8 +54,7 @@ class UserController {
                 _id: result._id
             }, 'my_token', { expiresIn: '1d' });
             return ctx.body = {
-                code: '000001',
-                data: token,
+                token,
                 msg: '登錄成功'
             }
         } else {
