@@ -11,7 +11,7 @@ class UserController {
         const { phoneNumber, password, email } = ctx.request.body;
         if (phoneNumber && email && password) {
             const res = await userModel.addOne({ ...ctx.request.body });
-            ctx.status = 201;
+            ctx.status = 200;
             ctx.body = {
                 stat: 'ok',
                 id: res.id,
@@ -24,7 +24,7 @@ class UserController {
 
     async getUsersData(ctx, next) {
         const res = await userModel.find();
-        ctx.status = 201;
+        ctx.status = 200;
         ctx.body = {
             stat: 'ok',
             users: res
