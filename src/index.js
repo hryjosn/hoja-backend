@@ -2,7 +2,9 @@ import Koa from 'koa'
 import logger from 'koa-logger'
 import router from './api/users/user.routes'
 import bodyParser from 'koa-bodyparser'
+import cors from 'koa2-cors'
 // let jwt = require('jsonwebtoken');
+
 
 
 const app = new Koa();
@@ -36,6 +38,13 @@ app.use(async(ctx, next) => {
     console.log(`${ctx.method} ${ctx.url} - ${ms}ms`);
 });
 app.use(router.routes());
+app.use(cors({
+    exposeHeaders: ['WWW-Authenticate', 'Server-Authorization', 'Date'],
+    maxAge: 100,
+    credentials: true,
+    allowMethods: ['GET', 'POST', 'OPTIONS'],
+    allowHeaders: ['Content-Type', 'Authorization', 'Accept', 'X-Custom-Header', 'anonymous'],
+}));
 const port = process.env.PORT || 3001;
 
 app.listen(port, () => console.log(`Listening on ${port}`));
