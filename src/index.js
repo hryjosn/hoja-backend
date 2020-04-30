@@ -2,7 +2,7 @@ import Koa from 'koa'
 import logger from 'koa-logger'
 import router from './api/users/user.routes'
 import bodyParser from 'koa-bodyparser'
-import cors from 'koa2-cors'
+import cors from '@koa/cors'
 // let jwt = require('jsonwebtoken');
 
 
