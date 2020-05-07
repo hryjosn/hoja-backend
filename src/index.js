@@ -1,10 +1,9 @@
 import Koa from 'koa'
 import logger from 'koa-logger'
-import router from './api/users/user.routes'
 import bodyParser from 'koa-bodyparser'
 import cors from '@koa/cors'
-// let jwt = require('jsonwebtoken');
 
+const applyApiMiddleware = require('./api');
 
 
 const app = new Koa();
@@ -43,8 +42,7 @@ app.use(async(ctx, next) => {
     const ms = Date.now() - start_time;
     console.log(`${ctx.method} ${ctx.url} - ${ms}ms`);
 });
-app.use(router.routes());
-
+applyApiMiddleware(app);
 const port = process.env.PORT || 3001;
 
-app.listen(port, () => console.log(`Listening on ${port}`));
+app.listen(port, () => console.log(`🚀 Server listening on port ${port}`));

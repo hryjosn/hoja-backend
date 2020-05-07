@@ -1,16 +1,16 @@
 // router.js
-import Router from 'koa-router'
 import AuthController from './user.controller'
 
-const router = new Router({
-    prefix: '/api'
-});
-const { addUserData, login, getUserData, modifiedUserData, deleteUserDelData,getUsersData } = AuthController;
-router
-    .post('/user', addUserData)
-    .post('/login', login)
-    .get('/users', getUsersData)
-    // .put('/user/:id/:method', modifiedUserData)
-    // .delete('/user/:id/:method', deleteUserDelData);
+module.exports = Router => {
+    const router = new Router({
+        prefix: '/user'
+    });
+    const { addUserData, login, getUserData, modifiedUserData, deleteUserDelData,getUsersData } = AuthController;
 
-export default router;
+    router
+        .post('/', addUserData)
+        .post('/login', login)
+        .get('/users', getUsersData)
+
+    return router;
+};
