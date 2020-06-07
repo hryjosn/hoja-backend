@@ -10,7 +10,6 @@ const User = mongoose.model('User', UserSchema);
 class UserModel {
     constructor() {
         mongoose.connect("mongodb+srv://hojaAdmin:blackozark@cluster0-0o6oo.mongodb.net/test?retryWrites=true&w=majority", { useNewUrlParser: true,useUnifiedTopology: true })
-            .then(res => console.log('Connected to db'));
     }
 
     addOne(params) {
