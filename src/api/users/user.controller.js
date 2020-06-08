@@ -40,6 +40,7 @@ class UserController {
     try {
       let decoded = jwt.verify(token, process.env.TOKEN_KEY);
       if (decoded["_id"]) {
+
       }
     } catch (err) {
       console.log("err", err); // bar
