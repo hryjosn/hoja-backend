@@ -49,7 +49,7 @@ app.use(
   koajwt({
     secret: process.env.TOKEN_KEY,
   }).unless({
-    path: [/\/user\/login/,/\/user\/signup/],
+    path: [/\/user\/login/,/\/user/],
   })
 );
 app.use(async (ctx, next) => {
