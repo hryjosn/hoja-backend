@@ -6,7 +6,7 @@
   "author": "Johnson <jo74705@gmail.com>",
   "license": "MIT",
   "engines": {
-    "node": "10.x"
+    "node": "12.x"
   },
   "scripts": {
     "build": "rm -rf dist && mkdir dist && babel src -s -d dist",
@@ -34,9 +34,11 @@
     "koa-logger": "^3.2.1",
     "koa-router": "^8.0.8",
     "koa2-cors": "^2.0.6",
-    "mongoose": "^5.9.7"
+    "mongoose": "^5.9.7",
+    "uuid": "^8.1.0"
   },
   "devDependencies": {
+    "babel-plugin-module-resolver": "^4.0.0",
     "nodemon": "^2.0.2"
   }
 }
