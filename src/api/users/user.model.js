@@ -1,5 +1,6 @@
 import mongoose from "mongoose";
 
+const DB_URL = process.env.DB_URL;
 const UserSchema = new mongoose.Schema({
   username: String,
   password: String,
@@ -9,10 +10,10 @@ const User = mongoose.model("User", UserSchema);
 
 class UserModel {
   constructor() {
-    mongoose.connect(
-      "mongodb+srv://hojaAdmin:blackozark@cluster0-0o6oo.mongodb.net/test?retryWrites=true&w=majority",
-      { useNewUrlParser: true, useUnifiedTopology: true }
-    );
+    mongoose.connect(DB_URL, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    });
   }
 
   addOne(params) {

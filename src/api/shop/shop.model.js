@@ -1,5 +1,6 @@
 import mongoose, { Schema } from "mongoose";
-import { generateId } from "@util";
+
+const DB_URL = process.env.DB_URL;
 const ShopSchema = new Schema({
   name: { type: String, trim: true },
   tags: Array,
@@ -20,14 +21,11 @@ const Shop = mongoose.model("Shop", ShopSchema);
 
 class ShopModel {
   constructor() {
-    mongoose.connect(
-      "mongodb+srv://hojaAdmin:blackozark@cluster0-0o6oo.mongodb.net/test?retryWrites=true&w=majority",
-      {
-        useNewUrlParser: true,
-        useUnifiedTopology: true,
-        useFindAndModify: false,
-      }
-    );
+    mongoose.connect(DB_URL, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+      useFindAndModify: false,
+    });
     mongoose.set("useFindAndModify", false);
   }
 
@@ -48,7 +46,7 @@ class ShopModel {
   async updateField({ fieldName, shop_id, item }) {
     return Shop.findByIdAndUpdate(
       shop_id,
-      { $push: { menuItems: item } },
+      { $push: { [fieldName]: item } },
       { upsert: true, new: true }
     );
   }

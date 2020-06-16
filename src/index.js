@@ -44,12 +44,21 @@ app.use(async function (ctx, next) {
     }
   });
 });
-
+app.use((ctx, next) => {
+  return next().catch((err) => {
+    if (err.status === 401) {
+      ctx.status = 401;
+      ctx.body = "please provide jwt token";
+    } else {
+      throw err;
+    }
+  });
+});
 app.use(
   koajwt({
     secret: process.env.TOKEN_KEY,
   }).unless({
-    path: [/\/user\/login/,/\/user/],
+    path: [/\/user\/login/, /\/user/],
   })
 );
 app.use(async (ctx, next) => {

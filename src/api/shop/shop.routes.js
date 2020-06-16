@@ -1,5 +1,7 @@
 // router.js
 import ShopController from "./shop.controller";
+import { upload } from "@util";
+
 
 module.exports = (Router) => {
     const router = new Router({
@@ -10,7 +12,7 @@ module.exports = (Router) => {
     router
         .post("/", addShopData)
         .post("/modify", modifiedShopData)
-        .post("/menu", addShopMenuItem)
+        .post("/menu", upload.single('photo'), addShopMenuItem)
         .get("/", getMyShop)
         .get("/all", getShopsData);
 

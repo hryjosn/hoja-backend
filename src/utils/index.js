@@ -1,2 +1,5 @@
 import generateId from "./generateId.util";
-export { generateId };
+import upload from "./upload";
+import uploadPhoto from "./uploadPhoto";
+
+export { generateId, upload, uploadPhoto };
