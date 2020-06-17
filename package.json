@@ -30,9 +30,7 @@
     "koa-router": "^8.0.8",
     "koa2-cors": "^2.0.6",
     "mongoose": "^5.9.7",
-    "uuid": "^8.1.0"
-  },
-  "devDependencies": {
+    "uuid": "^8.1.0",
     "@babel/cli": "7.10.1",
     "@babel/core": "7.10.2",
     "@babel/node": "7.10.1",
@@ -41,7 +39,9 @@
     "@babel/preset-env": "^7.8.7",
     "@babel/runtime": "^7.8.7",
     "@babel/runtime-corejs2": "7.10.2",
-    "babel-plugin-module-resolver": "^4.0.0",
+    "babel-plugin-module-resolver": "^4.0.0"
+  },
+  "devDependencies": {
     "nodemon": "^2.0.2"
   }
 }
