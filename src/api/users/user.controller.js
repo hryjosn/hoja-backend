@@ -40,7 +40,6 @@ class UserController {
     try {
       let decoded = jwt.verify(token, process.env.TOKEN_KEY);
       if (decoded["_id"]) {
-
       }
     } catch (err) {
       console.log("err", err); // bar
@@ -60,6 +59,7 @@ class UserController {
   async login(ctx) {
     const { email, phoneNumber, password } = ctx.request.body;
     if ((!email && !phoneNumber) || !password) {
+      ctx.statu = 400;
       return (ctx.body = {
         code: "000002",
         data: null,
@@ -88,6 +88,7 @@ class UserController {
         msg: "登錄成功",
       });
     } else {
+      ctx.status = 500;
       return (ctx.body = {
         code: "000002",
         data: null,
