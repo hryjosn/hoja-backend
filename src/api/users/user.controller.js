@@ -59,7 +59,7 @@ class UserController {
   async login(ctx) {
     const { email, phoneNumber, password } = ctx.request.body;
     if ((!email && !phoneNumber) || !password) {
-      ctx.statu = 400;
+      ctx.status = 400;
       return (ctx.body = {
         code: "000002",
         data: null,
