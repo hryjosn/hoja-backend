@@ -6,14 +6,14 @@ import jwt from "jsonwebtoken";
  */
 class UserController {
   async addUserData(ctx) {
-    const { phoneNumber, password, email } = ctx.request.body;
-    if ((!email && !phoneNumber) || !password) {
+    const { phone, password, email } = ctx.request.body;
+    if ((!email && !phone) || !password) {
       return (ctx.body = {
         code: "000002",
         msg: "參數格式錯誤",
       });
     }
-    let queryObject = { $or: [{ email }, { phoneNumber }] };
+    let queryObject = { $or: [{ email }, { phone }] };
     const result = await userModel.findOne(queryObject);
     if (result) {
       ctx.status = 301;
@@ -22,7 +22,7 @@ class UserController {
         msg: "信箱或手機已被註冊過",
       });
     }
-    if (phoneNumber && email && password) {
+    if (phone && email && password) {
       const res = await userModel.addOne({ ...ctx.request.body });
       ctx.status = 200;
       ctx.body = {
@@ -57,8 +57,8 @@ class UserController {
 
   // login check
   async login(ctx) {
-    const { email, phoneNumber, password } = ctx.request.body;
-    if ((!email && !phoneNumber) || !password) {
+    const { email, phone, password } = ctx.request.body;
+    if ((!email && !phone) || !password) {
       ctx.status = 400;
       return (ctx.body = {
         code: "000002",
@@ -70,7 +70,7 @@ class UserController {
     if (email) {
       queryObject = { email, password };
     } else {
-      queryObject = { phoneNumber, password };
+      queryObject = { phone, password };
     }
     const result = await userModel.findOne(queryObject);
     if (result !== null) {

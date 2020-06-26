@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 
 const DB_URL = process.env.DB_URL;
 const UserSchema = new mongoose.Schema({
-  phoneNumber: String,
+  phone: String,
   password: String,
   email: String,
 });
