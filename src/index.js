@@ -14,7 +14,7 @@ app.use(
     exposeHeaders: ["WWW-Authenticate", "Server-Authorization", "Date"],
     maxAge: 100,
     credentials: true,
-    allowMethods: ["GET", "POST", "OPTIONS"],
+    allowMethods: ["GET", "POST", "OPTIONS", "PATCH", "PUT"],
     allowHeaders: [
       "Content-Type",
       "Authorization",
