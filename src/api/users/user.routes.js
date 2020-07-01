@@ -8,17 +8,20 @@ module.exports = (Router) => {
   const {
     addUserData,
     login,
-    getUserData,
+    getCurrentUserData,
     modifiedUserData,
     deleteUserDelData,
     getUsersData,
+    test
   } = AuthController;
 
   router
     .post("/", addUserData)
-    .post("/modify", modifiedUserData)
+    .patch("/", modifiedUserData)
     .post("/login", login)
-    .get("/users", getUsersData);
+    .get("/users", getUsersData)
+    .get("/info", getCurrentUserData)
+
 
   return router;
 };
