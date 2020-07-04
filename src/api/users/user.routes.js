@@ -12,7 +12,6 @@ module.exports = (Router) => {
     modifiedUserData,
     deleteUserDelData,
     getUsersData,
-    test
   } = AuthController;
 
   router

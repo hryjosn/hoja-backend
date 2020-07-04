@@ -139,9 +139,6 @@ class UserController {
         }
     }
 
-    async test(ctx) {
-        console.log("ctx.params.id>>>>", ctx.params)
-    }
 }
 
 export default new UserController();
