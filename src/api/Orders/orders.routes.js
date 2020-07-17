@@ -7,11 +7,12 @@ module.exports = (Router) => {
     });
     const {
         getOrderData,
-        addOrderData
+        addOrderData, getAllOrderData
     } = OrderController;
 
     router
         .post("/", addOrderData)
+        .get("/all", getAllOrderData)
         .get("/:id", getOrderData)
 
 

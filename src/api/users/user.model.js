@@ -3,7 +3,7 @@ import mongoose from "mongoose";
 const DB_URL = process.env.DB_URL;
 const UserSchema = new mongoose.Schema({
     phone: String,
-    password: String,
+    password: { type: String, select: false },
     email: String,
     address: String,
     userName: String,
@@ -38,7 +38,7 @@ class UserModel {
     }
 
     findOne(params) {
-        return User.findOne(params);
+        return User.findOne(params).populate('-password')
     }
 }
 

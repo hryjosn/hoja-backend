@@ -1,13 +1,20 @@
 import MealModel from "./meals.model";
 
 class MealsController {
-    async addMealData(ctx) {
-        const {} = ctx.request.body;
-
-    }
 
     async getMealData(ctx) {
-        const res = await MealModel.find({ _id: ctx.params.id });
+        const { _id } = ctx.params
+        const res = await MealModel.findOne({ _id });
+        ctx.status = 200;
+        ctx.body = {
+            stat: "ok",
+            meal: res,
+        };
+    }
+    async getAllMealData(ctx) {
+        const { _id } = ctx.params
+        console.log(">>>",_id)
+        const res = await MealModel.find();
         ctx.status = 200;
         ctx.body = {
             stat: "ok",

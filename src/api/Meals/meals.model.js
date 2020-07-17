@@ -19,7 +19,7 @@ class MealsModel {
     }
 
     addOne(params) {
-        console.log("params>>>",params)
+        console.log("params>>>", params)
         let newMeal = new Meal(params);
         return newMeal.save();
     }
@@ -40,6 +40,15 @@ class MealsModel {
 
     findOne(params) {
         return Meal.findOne(params);
+    }
+
+    findMany(params) {
+        const { ids } = params
+        return Meal.find({
+            '_id': {
+                $in: ids.map(id => mongoose.Types.ObjectId(id))
+            }
+        });
     }
 }
 

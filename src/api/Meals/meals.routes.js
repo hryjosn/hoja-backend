@@ -7,12 +7,12 @@ module.exports = (Router) => {
     });
     const {
         getMealData,
-        addMealData
+        getAllMealData
     } = MealsController;
 
     router
-        .post("/", addMealData)
-        .get("/:id", getMealData)
+        .get("/:_id", getMealData)
+        .get("/", getAllMealData)
 
 
     return router;

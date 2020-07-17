@@ -2,11 +2,11 @@ import mongoose from "mongoose";
 
 const DB_URL = process.env.DB_URL;
 const OrderSchema = new mongoose.Schema({
-    phone: String,
-    password: String,
-    email: String,
-    address: String,
-    userName: String,
+    orderList: Array,
+    remark: String,
+    deliveryLocation: String,
+    deliveryTime: Date,
+    createdAt: Date
 });
 const Order = mongoose.model("Orders", OrderSchema);
 
@@ -28,8 +28,8 @@ class OrdersModel {
         try {
             return Order.updateOne({ _id }, { address, userName })
 
-        }catch (e){
-            console.error("error",e)
+        } catch (e) {
+            console.error("error", e)
         }
     }
 

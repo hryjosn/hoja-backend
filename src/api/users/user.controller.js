@@ -8,8 +8,6 @@ import bcrypt from "bcrypt";
 class UserController {
     async addUserData(ctx) {
         const { phone, password, email } = ctx.request.body;
-        console.log(email)
-        console.log(phone)
         if ((!email && !phone) || !password) {
             return (ctx.body = {
                 code: "000002",
@@ -18,7 +16,6 @@ class UserController {
         }
         let queryObject = { $or: [{ email }, { phone }] };
         const result = await userModel.findOne(queryObject);
-        console.log(result)
 
         if (result) {
             ctx.status = 301;
@@ -53,14 +50,12 @@ class UserController {
 
             if (_id) {
                 const res = await userModel.updateOne({ _id, ...body });
-                console.log("res",res)
                 if(res){
                     ctx.body = {
                         stat: "ok",
                         users: res,
                     };
                 }
-
             }
         } catch (err) {
             console.log("err", err); // bar
@@ -83,13 +78,13 @@ class UserController {
             const { _id } = decoded
             console.log("_id", _id)
             const res = await userModel.findOne({ _id });
-            const user = res
-            delete user.password
             if (res) {
+                delete res.password
+                console.log("res",res)
                 ctx.status = 200;
                 ctx.body = {
                     stat: "ok",
-                    user
+                    res
                 };
             }
         }

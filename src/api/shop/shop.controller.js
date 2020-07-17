@@ -59,7 +59,6 @@ class ShopController {
             const result = await mealModel.addOne({ shop_id, name, subtitle, price, photo_url });
             if (result) {
                 await shopModel.updateField({ fieldName: "mealsList", shop_id, data: result._id })
-                ctx.statSync()
                 ctx.body = {
                     code: "000003",
                     msg: "參數格式錯誤",
@@ -87,6 +86,7 @@ class ShopController {
             const token = ctx.header.authorization.split(" ")[1];
             let decoded = jwt.verify(token, tokenKey);
             const res = await shopModel.findOne({ userId: decoded["_id"] });
+            res.mealsList = await mealModel.findMany({ ids: res.mealsList });
             ctx.status = 200;
             ctx.body = {
                 code: "000001",
