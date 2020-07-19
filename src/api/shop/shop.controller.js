@@ -86,13 +86,22 @@ class ShopController {
             const token = ctx.header.authorization.split(" ")[1];
             let decoded = jwt.verify(token, tokenKey);
             const res = await shopModel.findOne({ userId: decoded["_id"] });
-            res.mealsList = await mealModel.findMany({ ids: res.mealsList });
-            ctx.status = 200;
-            ctx.body = {
-                code: "000001",
-                msg: "查詢成功",
-                data: res,
-            };
+            if(res){
+                res.mealsList = await mealModel.findMany({ ids: res.mealsList });
+                ctx.status = 200;
+                ctx.body = {
+                    code: "000001",
+                    msg: "查詢成功",
+                    data: res,
+                };
+            }else {
+                ctx.status = 200;
+                ctx.body = {
+                    code: "000002",
+                    msg: "尚未新增菜單",
+                };
+            }
+
         } catch (e) {
             console.error("error:", e);
         }
