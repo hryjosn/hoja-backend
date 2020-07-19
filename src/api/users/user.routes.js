@@ -10,7 +10,6 @@ module.exports = (Router) => {
     login,
     getCurrentUserData,
     modifiedUserData,
-    deleteUserDelData,
     getUsersData,
   } = AuthController;
 

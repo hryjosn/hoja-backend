@@ -45,12 +45,11 @@ class UserController {
         try {
             let decoded = jwt.verify(token, process.env.TOKEN_KEY);
             const { _id } = decoded
-            console.log("_id",_id)
             const user = await userModel.findOne({ _id });
 
             if (_id) {
                 const res = await userModel.updateOne({ _id, ...body });
-                if(res){
+                if (res) {
                     ctx.body = {
                         stat: "ok",
                         users: res,
@@ -79,12 +78,12 @@ class UserController {
             console.log("_id", _id)
             const res = await userModel.findOne({ _id });
             if (res) {
-                delete res.password
-                console.log("res",res)
+                const obj = res.toObject();
+                delete obj.password;
                 ctx.status = 200;
                 ctx.body = {
                     stat: "ok",
-                    res
+                    obj
                 };
             }
         }
