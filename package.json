@@ -6,7 +6,7 @@
   "author": "Johnson <jo74705@gmail.com>",
   "license": "MIT",
   "engines": {
-    "node": "16.x"
+    "node": "14.x"
   },
   "scripts": {
     "build": "rm -rf dist && mkdir dist && babel src -s -d dist",
