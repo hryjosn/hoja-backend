@@ -1,6 +1,7 @@
 // router.js
 import AuthController from "./user.controller";
 
+
 module.exports = (Router) => {
   const router = new Router({
     prefix: "/user",
@@ -15,7 +16,7 @@ module.exports = (Router) => {
 
   router
     .post("/", addUserData)
-    .patch("/", modifiedUserData)
+    .put("/", modifiedUserData)
     .post("/login", login)
     .get("/users", getUsersData)
     .get("/info", getCurrentUserData)

@@ -7,6 +7,7 @@ import bcrypt from "bcrypt";
  */
 class UserController {
     async addUserData(ctx) {
+        
         const { phone, password, email } = ctx.request.body;
         if ((!email && !phone) || !password) {
             return (ctx.body = {
@@ -24,6 +25,7 @@ class UserController {
                 msg: "信箱或手機已被註冊過",
             });
         }
+        console.log("result>",result)
         if (phone && email && password) {
             const hashPassword = await bcrypt.hash(password, 10)
             const newObj = { phone, email, password: hashPassword };

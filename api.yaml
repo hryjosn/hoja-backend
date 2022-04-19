@@ -1,0 +1,45 @@
+swagger: "2.0"
+info:
+  title: "Hoja"
+  description: >
+    Hoja Koa API.
+  version: "1.0.0"
+host: "https://hoja-backend.herokuapp.com/"
+schemes:
+  - "https"
+paths:
+  /user:
+    post:
+      summary: "Regist a user account"
+      parameters:
+        - in: path
+          name: email
+          type: string
+          required: true
+        - in: path
+          name: password
+          type: string
+          required: true
+          
+      description: "If the service is up and running correctly the response will be 'UP'"
+      consumes:
+        - "application/json"
+      produces:
+        - "application/json"
+      responses:
+        200:
+          description: "Service is up and healthy"
+          schema:
+            $ref: "#/definitions/User"
+    
+
+definitions:
+  User:
+    type: "object"
+    properties:
+      id:
+        type: "string" 
+      token:
+        type: "string" 
+      msg:
+        type: "string"

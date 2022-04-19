@@ -4,11 +4,16 @@ import bodyParser from "koa-bodyparser";
 import cors from "@koa/cors";
 import koajwt from "koa-jwt";
 import dotenv from "dotenv";
+import * as swagger from 'swagger2';
+import { ui, validate } from "swagger2-koa";
+
+const swaggerDocument = swagger.loadDocumentSync("api.yaml");
 
 dotenv.config();
 const applyApiMiddleware = require("./api");
 
 const app = new Koa();
+
 app.use(
   cors({
     exposeHeaders: ["WWW-Authenticate", "Server-Authorization", "Date"],
@@ -24,6 +29,7 @@ app.use(
     ],
   })
 );
+app.use(ui(swaggerDocument, "/swagger"));
 app.use(logger());
 app.use(bodyParser());
 
